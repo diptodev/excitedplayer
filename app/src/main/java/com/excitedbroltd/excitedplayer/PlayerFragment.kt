@@ -1,6 +1,9 @@
 package com.excitedbroltd.excitedplayer
 
 import android.annotation.SuppressLint
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.media.MediaMetadataRetriever
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -74,6 +77,24 @@ class PlayerFragment : Fragment(), View.OnClickListener {
             controlSeekbar(binding.seekbarControlSongId)
             binding.ibPlayPauseId.setBackgroundResource(R.drawable.icon_play)
         }
+
+        updatePlayerUI()
+    }
+
+    private fun updatePlayerUI() {
+        binding.tvSongTitleMarqueId.text = songList[songPos].title
+        binding.tvSongArtistMarqueId.isSelected = true
+        binding.tvSongTitleMarqueId.isSelected = true
+        binding.tvSongArtistMarqueId.text = songList[songPos].artist
+        binding.ivSongAlbumArtId.setImageBitmap(getSongMediaImage(songList[songPos].path))
+    }
+
+    private fun getSongMediaImage(path: String): Bitmap? {
+        val mediaMetadataRetriever = MediaMetadataRetriever()
+        mediaMetadataRetriever.setDataSource(path)
+        val image = mediaMetadataRetriever.embeddedPicture
+        return image?.size?.let { BitmapFactory.decodeByteArray(image, 0, it) }
+
     }
 
     private fun controlSeekbar(seekbar: SeekBar) {
@@ -103,13 +124,14 @@ class PlayerFragment : Fragment(), View.OnClickListener {
                 binding.seekbarControlSongId.progress = 0
                 controlSeekbar(binding.seekbarControlSongId)
                 binding.ibPlayPauseId.setBackgroundResource(R.drawable.icon_pause)
-
+                updatePlayerUI()
             }
             R.id.ib_playPrev_id -> {
                 musicPlayer.playPrevSong()
                 binding.seekbarControlSongId.progress = 0
                 controlSeekbar(binding.seekbarControlSongId)
                 binding.ibPlayPauseId.setBackgroundResource(R.drawable.icon_pause)
+                updatePlayerUI()
             }
         }
 
