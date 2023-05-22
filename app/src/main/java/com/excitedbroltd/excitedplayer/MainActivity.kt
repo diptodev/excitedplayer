@@ -23,6 +23,7 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
         lateinit var songList: ArrayList<Music>
+
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -142,6 +142,7 @@
             android:gravity="center">
 
             <ImageButton
+                android:id="@+id/ib_playPrev_id"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_gravity="bottom"

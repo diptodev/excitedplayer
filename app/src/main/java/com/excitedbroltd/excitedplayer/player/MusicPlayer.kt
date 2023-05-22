@@ -6,12 +6,13 @@ import android.media.AudioAttributes
 import android.media.AudioManager
 import android.media.MediaPlayer
 import android.net.Uri
-import com.excitedbroltd.excitedplayer.MainActivity
+import com.excitedbroltd.excitedplayer.MainActivity.Companion.songList
 
 class MusicPlayer(val context: Context) {
     companion object {
         lateinit var mediaPlayer: MediaPlayer
         var isPlaying = false
+        var songPos = 0;
     }
 
     val audioManager = context.getSystemService(AUDIO_SERVICE) as AudioManager
@@ -23,20 +24,36 @@ class MusicPlayer(val context: Context) {
         .build()
 
     fun createMedia() {
-        val uri = Uri.parse(MainActivity.songList[0].path)
+
+        val uri = Uri.parse(songList[songPos].path)
         mediaPlayer =
             MediaPlayer.create(context, uri, null, at, sessionId)
     }
 
     fun playPause(): Boolean {
         isPlaying = if (isPlaying) {
-            mediaPlayer.pause()
+            mediaPlayer?.pause()
             false
         } else {
-            mediaPlayer.start()
+            mediaPlayer?.start()
             true
         }
         return isPlaying
     }
+
+    fun playNextSong() {
+        mediaPlayer.release()
+        songPos++
+        createMedia()
+        mediaPlayer.start()
+    }
+
+    fun playPrevSong() {
+        mediaPlayer.release()
+        songPos--
+        createMedia()
+        mediaPlayer.start()
+    }
+
 
 }
