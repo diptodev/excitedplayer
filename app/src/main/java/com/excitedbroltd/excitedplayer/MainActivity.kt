@@ -1,6 +1,7 @@
 package com.excitedbroltd.excitedplayer
 
 import android.annotation.SuppressLint
+import android.content.ContentUris
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
@@ -155,12 +156,9 @@ class MainActivity : AppCompatActivity() {
                 val path = cursor.getString(cursor.getColumnIndexOrThrow(Media.DATA))
                 val atrist = cursor.getString(cursor.getColumnIndexOrThrow(Media.ARTIST))
                 val duration = cursor.getLong(cursor.getColumnIndexOrThrow(Media.DURATION))
-                var mThumbId = id
-                //cursor.getLong(cursor.getColumnIndexOrThrow(Media.ALBUM_ID))
-
-
+                var mThumbId = cursor.getLong(cursor.getColumnIndexOrThrow(Media._ID))
                 val thumbUri = Uri.parse("content://media/external/audio/albumart")
-                val thumb = Uri.withAppendedPath(thumbUri, mThumbId.toString()).toString()
+                val thumb = ContentUris.withAppendedId(thumbUri, mThumbId).toString()
                 val file = File(path)
                 if (file.exists()) {
                     val music = Music(

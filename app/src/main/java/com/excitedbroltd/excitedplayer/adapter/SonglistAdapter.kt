@@ -1,12 +1,14 @@
 package com.excitedbroltd.excitedplayer.adapter
 
 import android.content.Context
+import android.media.MediaMetadataRetriever
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.excited.lighterplayer.dataclass.formatTime
 import com.excitedbroltd.excitedplayer.MainActivity
 import com.excitedbroltd.excitedplayer.R
@@ -36,6 +38,16 @@ class SonglistAdapter(private val context: Context) :
         holder.songTitle.text = songDetails.title
         holder.songArtist.text = songDetails.artist
         holder.songDuration.text = formatTime(songDetails.duration)
+        val image = getSongMediaImage(songDetails.path)
+        Glide.with(context).load(image).into(holder.songThumb)
+    }
+
+    private fun getSongMediaImage(path: String): ByteArray? {
+        val mediaMetadataRetriever = MediaMetadataRetriever()
+        mediaMetadataRetriever.setDataSource(path)
+        val image = mediaMetadataRetriever.embeddedPicture
+        return image
+
     }
 
 }

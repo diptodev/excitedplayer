@@ -49,8 +49,8 @@
             android:orientation="horizontal">
 
             <ImageView
-                android:layout_width="55dp"
-                android:layout_height="55dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:layout_gravity="start"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="15dp"
@@ -58,8 +58,8 @@
                 android:src="@drawable/icon_shuffle" />
 
             <ImageView
-                android:layout_width="55dp"
-                android:layout_height="55dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:layout_gravity="start"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="15dp"
@@ -67,8 +67,8 @@
                 android:src="@drawable/icon_add_to_playlist" />
 
             <ImageView
-                android:layout_width="55dp"
-                android:layout_height="55dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:layout_gravity="start"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="15dp"
@@ -83,8 +83,8 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="55dp"
-                    android:layout_height="55dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:layout_gravity="center"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="15dp"
@@ -110,27 +110,28 @@
             android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/tv_runningDuration_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="12:20"
+                android:text="00:00"
                 android:textColor="@color/dark_blue" />
 
             <SeekBar
+                android:id="@+id/seekbar_controlSong_id"
                 style="?android:attr/progressBarStyleHorizontal"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="1"
-                android:max="100"
-                android:progress="50"
                 android:progressTint="@color/dark_blue"
                 android:secondaryProgressTint="@color/orange"
                 android:thumbTint="@color/dark_blue" />
 
             <TextView
+                android:id="@+id/tv_totalDuration_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="12:20"
+                android:text="00:00"
                 android:textColor="@color/dark_blue" />
         </LinearLayout>
 
@@ -141,22 +142,23 @@
             android:gravity="center">
 
             <ImageButton
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:layout_gravity="bottom"
-
                 android:background="@drawable/icon_prev" />
 
             <ImageButton
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:id="@+id/ib_playPause_id"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:background="@drawable/icon_play" />
 
             <ImageButton
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:id="@+id/ib_playNext_id"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:layout_gravity="bottom"
                 android:background="@drawable/icon_next" />
         </LinearLayout>
