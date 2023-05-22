@@ -102,14 +102,14 @@ class PlayerFragment : Fragment(), View.OnClickListener {
                 musicPlayer.playNextSong()
                 binding.seekbarControlSongId.progress = 0
                 controlSeekbar(binding.seekbarControlSongId)
-                binding.ibPlayPauseId.setBackgroundResource(R.drawable.icon_play)
+                binding.ibPlayPauseId.setBackgroundResource(R.drawable.icon_pause)
 
             }
             R.id.ib_playPrev_id -> {
                 musicPlayer.playPrevSong()
                 binding.seekbarControlSongId.progress = 0
                 controlSeekbar(binding.seekbarControlSongId)
-                binding.ibPlayPauseId.setBackgroundResource(R.drawable.icon_play)
+                binding.ibPlayPauseId.setBackgroundResource(R.drawable.icon_pause)
             }
         }
 
