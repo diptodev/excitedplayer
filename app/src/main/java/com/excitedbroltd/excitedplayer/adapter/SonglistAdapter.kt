@@ -9,14 +9,13 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.excited.lighterplayer.dataclass.Music
 import com.excited.lighterplayer.dataclass.formatTime
-import com.excitedbroltd.excitedplayer.MainActivity
 import com.excitedbroltd.excitedplayer.R
 
-class SonglistAdapter(private val context: Context) :
+class SonglistAdapter(private val context: Context, private val songList: ArrayList<Music>) :
     RecyclerView.Adapter<SonglistAdapter.MyViewHolderClass>() {
 
-    private val songlist = MainActivity.songList
 
     class MyViewHolderClass(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val songThumb = itemView.findViewById<ImageView>(R.id.album_art_id)
@@ -31,10 +30,10 @@ class SonglistAdapter(private val context: Context) :
 
     }
 
-    override fun getItemCount(): Int = songlist.size
+    override fun getItemCount(): Int = songList.size
 
     override fun onBindViewHolder(holder: MyViewHolderClass, position: Int) {
-        var songDetails = songlist[position]
+        var songDetails = songList[position]
         holder.songTitle.text = songDetails.title
         holder.songArtist.text = songDetails.artist
         holder.songDuration.text = formatTime(songDetails.duration)

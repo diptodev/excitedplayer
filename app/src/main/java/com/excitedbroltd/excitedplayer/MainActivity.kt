@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.viewpager2.widget.ViewPager2
 import com.excited.lighterplayer.dataclass.Music
+import com.excitedbroltd.excitedplayer.adapter.TabAdapter
 import com.excitedbroltd.excitedplayer.databinding.ActivityMainBinding
 import com.google.android.material.tabs.TabLayout
 import java.io.File

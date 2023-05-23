@@ -15,6 +15,7 @@ import android.widget.SeekBar.OnSeekBarChangeListener
 import androidx.fragment.app.Fragment
 import com.excited.lighterplayer.dataclass.formatTime
 import com.excitedbroltd.excitedplayer.MainActivity.Companion.songList
+import com.excitedbroltd.excitedplayer.adapter.SonglistAdapter
 import com.excitedbroltd.excitedplayer.databinding.FragmentPlayerBinding
 import com.excitedbroltd.excitedplayer.player.MusicPlayer
 import com.excitedbroltd.excitedplayer.player.MusicPlayer.Companion.mediaPlayer
@@ -55,6 +56,7 @@ class PlayerFragment : Fragment(), View.OnClickListener {
         binding.ibPlayPauseId.setOnClickListener(this)
         binding.ibPlayNextId.setOnClickListener(this)
         binding.ibPlayPrevId.setOnClickListener(this)
+        binding.ivSongStatusId.setOnClickListener(this)
         binding.seekbarControlSongId.setOnSeekBarChangeListener(object : OnSeekBarChangeListener {
             override fun onProgressChanged(seekbar: SeekBar, progress: Int, fromUser: Boolean) {
                 if (fromUser) {
@@ -137,10 +139,39 @@ class PlayerFragment : Fragment(), View.OnClickListener {
                 updatePlayerUI()
             }
             R.id.iv_songStatus_id -> {
-
+                if (listPlay) {
+                    shuffle = true
+                    listPlay = false
+                    binding.ivSongStatusId.setImageResource(R.drawable.icon_shuffle)
+                    songList.shuffle()
+                    rearrangeList()
+                } else if (shuffle) {
+                    repeatAll = true
+                    shuffle = false
+                    binding.ivSongStatusId.setImageResource(R.drawable.icon_repeat)
+                } else if (repeatAll) {
+                    repeatOne = true
+                    repeatAll = false
+                    binding.ivSongStatusId.setImageResource(R.drawable.icon_repeat_one)
+                } else {
+                    listPlay = true
+                    repeatOne = false
+                    binding.ivSongStatusId.setImageResource(R.drawable.icon_list_play)
+                    songList.shuffle()
+                    rearrangeList()
+                }
             }
         }
 
+    }
+
+     fun rearrangeList() {
+        try {
+            ListFragment.rv.adapter =
+                SonglistAdapter(ListFragment.contextm, songList)
+        } catch (e: java.lang.Exception) {
+
+        }
     }
 
 

@@ -1,6 +1,8 @@
 package com.excitedbroltd.excitedplayer
 
+import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,8 +12,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.excitedbroltd.excitedplayer.adapter.SonglistAdapter
 
 
-class ListFragment : Fragment() {
+class ListFragment : Fragment(), Shuffle {
 
+    companion object {
+        lateinit var rv: RecyclerView
+        lateinit var contextm: Context
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,10 +33,17 @@ class ListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val rv = view.findViewById<RecyclerView>(R.id.rv_songList_id)
+        Log.d("Fragment", "onViewCreated: Fragment opend")
+        rv = view.findViewById(R.id.rv_songList_id)
         rv.layoutManager = LinearLayoutManager(context)
+        contextm = requireContext()
+        var playerFragment = PlayerFragment()
+        playerFragment.rearrangeList()
+    }
+
+    override fun shuffle(isShuffled: Boolean) {
         rv.adapter = context?.let {
-            SonglistAdapter(it)
+            SonglistAdapter(it, MainActivity.songList)
         }
     }
 }
