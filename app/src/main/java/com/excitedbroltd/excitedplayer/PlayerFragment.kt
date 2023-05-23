@@ -30,6 +30,10 @@ class PlayerFragment : Fragment(), View.OnClickListener {
         val binding get() = _binding!!
         val handler = Handler(Looper.getMainLooper())
         lateinit var musicPlayer: MusicPlayer
+        var listPlay = true;
+        var shuffle = false
+        var repeatAll = false;
+        var repeatOne = false;
     }
 
     var TAG = "PlayerFragment"
@@ -56,7 +60,7 @@ class PlayerFragment : Fragment(), View.OnClickListener {
                 if (fromUser) {
                     seekbar.progress = progress
                     handler.removeCallbacks(runnable)
-                    binding?.tvRunningDurationId?.text = formatTime(progress.toLong())
+                    binding.tvRunningDurationId?.text = formatTime(progress.toLong())
 
                 }
             }
@@ -94,7 +98,6 @@ class PlayerFragment : Fragment(), View.OnClickListener {
         mediaMetadataRetriever.setDataSource(path)
         val image = mediaMetadataRetriever.embeddedPicture
         return image?.size?.let { BitmapFactory.decodeByteArray(image, 0, it) }
-
     }
 
     private fun controlSeekbar(seekbar: SeekBar) {
@@ -112,7 +115,7 @@ class PlayerFragment : Fragment(), View.OnClickListener {
     override fun onClick(view: View) {
         when (view.id) {
             R.id.ib_playPause_id -> {
-                binding.seekbarControlSongId.let { it1 -> controlSeekbar(it1) }
+                controlSeekbar(binding.seekbarControlSongId)
                 if (musicPlayer.playPause()) {
                     binding.ibPlayPauseId.setBackgroundResource(R.drawable.icon_pause)
                 } else {
@@ -132,6 +135,9 @@ class PlayerFragment : Fragment(), View.OnClickListener {
                 controlSeekbar(binding.seekbarControlSongId)
                 binding.ibPlayPauseId.setBackgroundResource(R.drawable.icon_pause)
                 updatePlayerUI()
+            }
+            R.id.iv_songStatus_id -> {
+
             }
         }
 

@@ -47,7 +47,6 @@ class SonglistAdapter(private val context: Context) :
         mediaMetadataRetriever.setDataSource(path)
         val image = mediaMetadataRetriever.embeddedPicture
         return image
-
     }
 
 }
